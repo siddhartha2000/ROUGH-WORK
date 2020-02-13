@@ -1,0 +1,18 @@
+create table branch( branch_name varchar(10),branch_city varchar(20),assets real);
+alter table branch
+add primary key(branch_name);
+
+
+desc branch
+
+create table bankaccount( accno int, branchname varchar(30),balance real ,primary key(accno),foreign key (branchname) references branch(branch_name));
+desc bankaccount
+
+create table bankcustomer(customername varchar(30),customerstreet varchar(30),customercity varchar(30) ,primary key(customername));
+desc bankcustomer
+
+create table depositer(customername varchar(30),accno int,primary key(customername,accno),foreign key(customername) references bankcustomer(customername),foreign key(accno) references bankaccount(accno));
+desc depositer
+
+create table loan(loannumber int,branchname varchar(30),amount real ,primary key(loannumber), foreign key(branchname) references branch(branch_name));
+desc loan
